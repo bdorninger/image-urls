@@ -9,7 +9,7 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: [ './app.component.css' ]
 })
 export class AppComponent  {
-
+  myImageKey = 'imgKey';
   blob: Blob;
   url: string;
   //Constructor Required
