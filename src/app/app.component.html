@@ -1,8 +1,15 @@
-<img [src]="transform()">
-<h2>foo</h2>
+<img [src]="transform()" />
+<h2>{{getHeading()}}</h2>
 <img [src]="transform2()">
 <h2>bar</h2>
 <img [src]="transformBlob()">
 <h2>karl</h2>
 <img [src]="myImageKey|svgpipe:'o2:'" />
 <img [src]="'myImageKey'|svgpipe:'o2:'" />
+<div>  
+  <input type="image" [src]="transform()" />
+</div>
+
+<div spyme>  
+  <button><div><img [src]="transform()"></div>Foo</button>
+</div>
