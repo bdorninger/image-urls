@@ -11,7 +11,7 @@ import {
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
-import { base64Image, svg } from './imagedata';
+import { base64Image, svg, svg2 } from './imagedata';
 
 @Component({
   selector: 'my-app',
@@ -28,7 +28,7 @@ export class AppComponent
   imgPiped$: Observable<SafeResourceUrl>
   //Constructor Required
   constructor(private sanitizer: DomSanitizer) {
-    this.blob = new Blob([svg], { type: 'image/svg+xml' });
+    this.blob = new Blob([svg2], { type: 'image/svg+xml' });
     this.url = URL.createObjectURL(this.blob);
     this.imgPiped$ = this.img$.pipe(tap(str => console.log("img: ",str.substring(0,15))),map(raw => this.sanitizer.bypassSecurityTrustResourceUrl(raw)));
   }

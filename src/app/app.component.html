@@ -2,14 +2,15 @@
 <h2>{{getHeading()}}</h2>
 <img [src]="transform2()">
 <h2>bar</h2>
-<img spyme [src]="transformBlob()">
+<img [src]="transformBlob()">
 <h2>karl</h2>
-<img [src]="myImageKey|svgpipe:'o2:'" />
-<img [src]="'myImageKey'|svgpipe:'o2:'" />
+<!-- <img [src]="myImageKey|svgpipe:'o2:'" />
+<img [src]="'myImageKey'|svgpipe:'o2:'" /> 
+-->
 <div>  
   <input type="image" [src]="transform2()" />
 </div>
 
 <div>  
-  <button (click)="onClickMe()"><div><img [src]="imgPiped$|async"></div>Foo</button>
+  <button class="bt" (click)="onClickMe()"><div spyme><img [src]="imgPiped$|async"></div>Foo</button>
 </div>
