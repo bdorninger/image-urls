@@ -1,15 +1,15 @@
-<img [src]="transform()" />
+<img [src]="transform2('base64')" />
 <h2>{{getHeading()}}</h2>
 <img [src]="transform2()">
 <h2>bar</h2>
-<img [src]="transformBlob()">
+<img spyme [src]="transformBlob()">
 <h2>karl</h2>
 <img [src]="myImageKey|svgpipe:'o2:'" />
 <img [src]="'myImageKey'|svgpipe:'o2:'" />
 <div>  
-  <input type="image" [src]="transform()" />
+  <input type="image" [src]="transform2()" />
 </div>
 
-<div spyme>  
-  <button><div><img [src]="transform()"></div>Foo</button>
+<div>  
+  <button (click)="onClickMe()"><div><img [src]="imgPiped$|async"></div>Foo</button>
 </div>

@@ -8,7 +8,9 @@ import {
 } from '@angular/core';
 
 //This is required
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 import { base64Image, svg } from './imagedata';
 
 @Component({
@@ -18,13 +20,17 @@ import { base64Image, svg } from './imagedata';
 })
 export class AppComponent
   implements OnChanges, AfterContentChecked, AfterViewInit, AfterViewChecked {
+  iswitch = false;
   myImageKey = 'imgKey';
   blob: Blob;
   url: string;
+  img$: Subject<string> = new BehaviorSubject(svg);
+  imgPiped$: Observable<SafeResourceUrl>
   //Constructor Required
   constructor(private sanitizer: DomSanitizer) {
     this.blob = new Blob([svg], { type: 'image/svg+xml' });
     this.url = URL.createObjectURL(this.blob);
+    this.imgPiped$ = this.img$.pipe(tap(str => console.log("img: ",str.substring(0,15))),map(raw => this.sanitizer.bypassSecurityTrustResourceUrl(raw)));
   }
   ngAfterViewChecked(): void {
     // console.log('After View chk');
@@ -35,7 +41,7 @@ export class AppComponent
   }
 
   public getHeading() {
-    return 'F.O.O' + new Date();
+    return 'F.O.O' ;
   }
 
   public ngAfterContentChecked(): void {
@@ -48,6 +54,9 @@ export class AppComponent
 
   onClickMe() {
     console.log('clk!');
+    this.iswitch=!this.iswitch;
+    const str = this.iswitch ? base64Image : svg
+    this.img$.next(str)
   }
 
   //Call this method in the image source, it will sanitize it.
@@ -55,10 +64,11 @@ export class AppComponent
     return this.sanitizer.bypassSecurityTrustResourceUrl(this.getBase64());
   }
 
-  transform2() {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(
-      'data:image/svg+xml,' + this.getSvg()
-    );
+  transform2(key:string='svg') {
+    
+    return key==='svg'? this.sanitizer.bypassSecurityTrustResourceUrl(
+       this.getSvg()
+    ): this.sanitizer.bypassSecurityTrustResourceUrl(this.getBase64());
   }
 
   transformBlob() {
