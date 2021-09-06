@@ -2,7 +2,7 @@
 <h2>{{getHeading()}}</h2>
 <img [src]="transform2()">
 <h2>bar</h2>
-<img [src]="transformBlob()">
+<img [src]="sanitizeUrl(this.url)">
 <h2>karl</h2>
 <!-- <img [src]="myImageKey|svgpipe:'o2:'" />
 <img [src]="'myImageKey'|svgpipe:'o2:'" /> 
@@ -13,4 +13,22 @@
 
 <div>  
   <button class="bt" (click)="onClickMe()"><div spyme><img [src]="imgPiped$|async"></div>Foo</button>
+</div>
+
+<h2>png</h2>
+
+<div>
+   <img [src]="this.url2"/>
+</div>
+
+<h2>svg enc</h2>
+
+<div>
+   <img [src]="this.url3"/>
+</div>
+
+<h2>jpg</h2>
+
+<div>
+   <img [src]="this.url4"/>
 </div>
